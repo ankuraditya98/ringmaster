@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  sender:
+    build: .
+    container_name: video_sender
+    command: ./src/app/video_sender 12345 /data/ice_4cif_30fps.y4m
+    networks:
+      - ringnet
+
+  receiver:
+    build: .
+    container_name: video_receiver
+    depends_on:
+      - sender
+    command: ./src/app/video_receiver video_sender 12345 704 576 --fps 30 --cbr 500
+    networks:
+      - ringnet
+
+networks:
+  ringnet:
+

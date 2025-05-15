@@ -33,6 +33,17 @@ void print_usage(const string & program_name)
   "-v, --verbose              enable more logging for debugging"
   << endl;
 }
+// void print_usage(const string & program_name)
+// {
+//   cerr <<
+//   "Usage: " << program_name << " [options] <receiver_ip> <port> <video_file>\n\n"
+//   "Options:\n"
+//   "--mtu <MTU>                MTU for deciding UDP payload size\n"
+//   "-o, --output <file>        file to output performance results to\n"
+//   "-v, --verbose              enable more logging for debugging"
+//   << endl;
+// }
+
 
 pair<Address, ConfigMsg> recv_config_msg(UDPSocket & udp_sock)
 {
@@ -111,6 +122,29 @@ int main(int argc, char * argv[])
   const auto height = config_msg.height;
   const auto frame_rate = config_msg.frame_rate;
   const auto target_bitrate = config_msg.target_bitrate;
+
+
+//   if (optind != argc - 3) {
+//   cerr << "Usage: " << argv[0] << " <receiver_ip> <port> <video_file>\n";
+//   return EXIT_FAILURE;
+// }
+
+// const string receiver_ip = argv[optind];
+// const auto port = narrow_cast<uint16_t>(strict_stoi(argv[optind + 1]));
+// const string y4m_path = argv[optind + 2];
+
+// UDPSocket udp_sock;
+// udp_sock.bind({"0", 0}); // bind to any available local port
+// Address peer_addr(receiver_ip, port);
+// udp_sock.connect(peer_addr);
+
+// cerr << "Sending to " << peer_addr.str() << endl;
+
+// // hardcoded config since we're bypassing ConfigMsg
+// const auto width = 704;
+// const auto height = 576;
+// const auto frame_rate = 30;
+// const auto target_bitrate = 500;
 
   cerr << "Received config: width=" << to_string(width)
        << " height=" << to_string(height)
